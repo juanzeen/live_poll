@@ -50,7 +50,7 @@ defmodule LivePoll.MixProject do
        sparse: "optimized",
        app: false,
        compile: false,
-       depth: 1},
+       depth: 1}
     ]
   end
 

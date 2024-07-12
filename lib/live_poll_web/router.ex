@@ -17,7 +17,8 @@ defmodule LivePollWeb.Router do
   scope "/", LivePollWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", PollLive.Index, :home
+    live "/new", PollLive.Create, :new
   end
 
   # Other scopes may use custom stacks.

@@ -3,9 +3,9 @@ import Config
 # Configure your database
 config :live_poll, LivePoll.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "1234",
   hostname: "localhost",
-  database: "live_poll_dev",
+  database: "live_polls_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -25,7 +25,8 @@ config :live_poll, LivePollWeb.Endpoint,
   debug_errors: true,
   secret_key_base: "hsVE1TsszttlJy6oT+xtWJUXbC6h0C2zScO7OKK7o9Moo95mIB9lChofe6+eePUZ",
   watchers: [
-    esbuild: {Esbuild, :install_and_run, [:live_poll, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:live_poll, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:live_poll, ~w(--watch)]}
   ]
 
 # ## SSL Support
