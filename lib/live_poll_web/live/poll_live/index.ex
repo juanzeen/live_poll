@@ -26,7 +26,7 @@ defmodule LivePollWeb.PollLive.Index do
 
         <div class="w-full text-baseline flex items-center justify-center">
 
-        <div class="w-1/3 flex justify-around">
+        <div class="w-1/2 flex justify-around">
           <span class="font-semibold bg-zinc-700 text-zinc-100 rounded-full px-1.5 py-0.5">
             <%= poll.opt1_votes %>
           </span>
@@ -35,13 +35,13 @@ defmodule LivePollWeb.PollLive.Index do
           </p>
         </div>
 
-        <span class="bg-lime-500 h-40"></span>
 
-        <div class="w-1/3 flex justify-around">
+
+        <div class="w-1/2 flex justify-evenly">
           <span class="font-semibold bg-zinc-700 text-zinc-100 rounded-full px-1.5 py-0.5">
             <%= poll.opt2_votes%>
           </span>
-          <p>
+          <p class="text-left">
             <%= poll.opt2_name %>
           </p>
         </div>

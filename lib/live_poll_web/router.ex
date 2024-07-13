@@ -19,6 +19,7 @@ defmodule LivePollWeb.Router do
 
     live "/", PollLive.Index, :home
     live "/new", PollLive.Create, :new
+    live "/details/:id",  PollLive.Details, :view
   end
 
   # Other scopes may use custom stacks.
