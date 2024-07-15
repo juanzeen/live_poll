@@ -14,34 +14,23 @@ defmodule LivePollWeb.PollLive.Create do
   def handle_event("create_poll", %{"polls" => poll_params}, socket) do
     socket =
       case Context.create_poll(poll_params) do
-        {:ok, %Polls{} = poll} -> put_flash(socket, :info, "The #{poll.name} was created!")
-        {:error, %Ecto.Changeset{} = changeset} -> form = to_form(changeset)
-        socket |> assign(form: form) |> put_flash(:error, "Invalid poll")
+        {:ok, %Polls{} = poll} ->
+          put_flash(socket, :info, "The #{poll.name} was created!")
+
+        {:error, %Ecto.Changeset{} = changeset} ->
+          form = to_form(changeset)
+          socket |> assign(form: form) |> put_flash(:error, "Invalid poll")
       end
+
     {:noreply, socket}
-  end
-
-  def handle_event("validate_poll", %{"polls" => poll_params}, socket) do
-    #params_w_votes = %{poll_params | opt1_votes: 0, opt2_votes: 0}
-
-    form =
-      Polls.changeset(%Polls{}, poll_params)
-      |> Map.put(:action, :validate)
-      |> to_form()
-
-    {:noreply, assign(socket, form: form)}
   end
 
   def render(assigns) do
     ~H"""
     <div class="space-y-5 flex flex-col items-center">
-     Put here the data for the new poll!
-      <.form
-      for={@form}
-     phx-submit="create_poll"
-     class="w-full space-y-3 text-center"
-     >
-
+      Put here the data for the new poll!
+      <.form for={@form} phx-submit="create_poll" class="w-full space-y-3 text-center">
+        <!-- fiel recebe o @form, que foi crido no mount e passamos a chave como átomo para que seja possível trabalhar com o changeset -->
         <.input placeholder="Poll name" field={@form[:name]}></.input>
 
         <.input placeholder="First option" field={@form[:opt1_name]}></.input>
@@ -51,13 +40,10 @@ defmodule LivePollWeb.PollLive.Create do
         <.button type="submit">Create Poll</.button>
       </.form>
 
-      <.link navigate={~p"/"}>
-        <.button>
+      <.back navigate={~p"/"}>
           Go back to the list of polls
-        </.button>
-      </.link>
+      </.back>
     </div>
     """
   end
-
 end

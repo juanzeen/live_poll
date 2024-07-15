@@ -18,10 +18,10 @@ defmodule LivePoll.PollsContext.Context do
   end
 
   def add_vote(%Polls{} = poll, attrs) do
-    IO.inspect(attrs)
     poll
     |> Polls.changeset(attrs)
     |> Repo.update()
+
   end
 
   def get_poll!(id) do

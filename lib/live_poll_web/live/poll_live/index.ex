@@ -2,9 +2,8 @@ defmodule LivePollWeb.PollLive.Index do
   alias LivePoll.PollsContext.Context
   use LivePollWeb, :live_view
 
-  def mount(params, session, socket) do
+  def mount(_params, _session, socket) do
     socket = socket |> assign(polls: Context.list_polls())
-
     {:ok, socket}
   end
 
@@ -20,44 +19,11 @@ defmodule LivePollWeb.PollLive.Index do
 
       <div
         :for={poll <- @polls}
-        class="w-10/12 h-72 py-2 bg-zinc-100 rounded-lg flex flex-col polls-center justify-around"
+        class="w-3/4 h-20 py-2 bg-zinc-100 rounded-lg flex flex-col polls-center justify-around"
       >
-        <h2 class="text-lg uppercase"><%= poll.name %></h2>
+        <h2 class="text-lg"><%= poll.name %></h2>
+        <.link navigate={~p"/details/#{poll.id}"}>More details</.link>
 
-        <div class="w-full text-baseline flex items-center justify-center">
-
-        <div class="w-1/2 flex justify-around">
-          <span class="font-semibold bg-zinc-700 text-zinc-100 rounded-full px-1.5 py-0.5">
-            <%= poll.opt1_votes %>
-          </span>
-          <p>
-            <%= poll.opt1_name %>
-          </p>
-        </div>
-
-
-
-        <div class="w-1/2 flex justify-evenly">
-          <span class="font-semibold bg-zinc-700 text-zinc-100 rounded-full px-1.5 py-0.5">
-            <%= poll.opt2_votes%>
-          </span>
-          <p class="text-left">
-            <%= poll.opt2_name %>
-          </p>
-        </div>
-
-        </div>
-
-        <div>
-        <!-- usamos o JS.push para que não haja necessidade de muitos phx-value-->
-          <.button phx-click={JS.push("add_vote", value: %{id: poll.id, origin: "opt1"})}>
-            Vote first option
-          </.button>
-
-          <.button phx-click={JS.push("add_vote", value: %{id: poll.id, origin: "opt2"})}>
-            Vote second option
-          </.button>
-        </div>
       </div>
 
       <.link navigate={~p"/new"}>
@@ -68,6 +34,4 @@ defmodule LivePollWeb.PollLive.Index do
     </div>
     """
   end
-
-
 end
