@@ -34,24 +34,24 @@ defmodule LivePollWeb.PollLive.Details do
   def render(assigns) do
     ~H"""
     <div class="flex flex-col items-center space-y-5">
-    <div class="w-10/12 h-72 py-2 bg-zinc-50 rounded-lg flex flex-col items-center justify-around shadow-lg">
-      <h2 class="text-lg"><%= @current_poll.name%></h2>
+    <div class="w-10/12 h-72 py-2 bg-zinc-800 rounded-lg flex flex-col items-center justify-around shadow-lg">
+      <h2 class="text-lg text-zinc-100"><%= @current_poll.name%></h2>
 
       <div class="w-full text-baseline flex items-center justify-center">
         <div class="w-1/2 flex justify-around">
-          <span class="font-semibold bg-zinc-700 text-zinc-100 rounded-full px-1.5 py-0.5">
+          <span class="font-semibold bg-lime-500 text-zinc-100 rounded-full px-2.5 py-0.5">
             <%= @current_poll.opt1_votes%>
           </span>
-          <p>
+          <p class="text-zinc-100">
           <%= @current_poll.opt1_name%>
           </p>
         </div>
 
         <div class="w-1/2 flex justify-evenly">
-        <span class="font-semibold bg-zinc-700 text-zinc-100 rounded-full px-1.5 py-0.5">
+        <span class="font-semibold bg-lime-500 text-zinc-100 rounded-full px-2.5 py-0.5">
             <%= @current_poll.opt2_votes%>
           </span>
-          <p>
+          <p class="text-zinc-100">
           <%= @current_poll.opt2_name%>
           </p>
         </div>
@@ -60,6 +60,7 @@ defmodule LivePollWeb.PollLive.Details do
         <!-- usamos o JS.push para que não haja necessidade de muitos phx-value-->
         <.button
         phx-click={JS.push("add_vote", value: %{destiny: "opt1_votes"})}
+
         >
           <%= @current_poll.opt1_name %>
         </.button>

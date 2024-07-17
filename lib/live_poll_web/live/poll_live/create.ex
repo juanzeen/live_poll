@@ -15,7 +15,7 @@ defmodule LivePollWeb.PollLive.Create do
     socket =
       case Context.create_poll(poll_params) do
         {:ok, %Polls{} = poll} ->
-          put_flash(socket, :info, "The #{poll.name} was created!")
+          put_flash(socket, :info, "The poll #{poll.name} was created!")
 
         {:error, %Ecto.Changeset{} = changeset} ->
           form = to_form(changeset)
@@ -28,9 +28,9 @@ defmodule LivePollWeb.PollLive.Create do
   def render(assigns) do
     ~H"""
     <div class="space-y-5 flex flex-col items-center">
-      Put here the data for the new poll!
+      <h2 class="text-zinc-100">Put here the data for the new poll!</h2>
       <.form for={@form} phx-submit="create_poll" class="w-full space-y-3 text-center">
-        <!-- fiel recebe o @form, que foi crido no mount e passamos a chave como átomo para que seja possível trabalhar com o changeset -->
+        <!-- field recebe o @form, que foi crido no mount e passamos a chave como átomo para que seja possível trabalhar com o changeset -->
         <.input placeholder="Poll name" field={@form[:name]}></.input>
 
         <.input placeholder="First option" field={@form[:opt1_name]}></.input>

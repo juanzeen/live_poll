@@ -8,6 +8,7 @@ defmodule LivePoll.PollsContext.Polls do
     field :opt2_name, :string
     field :opt1_votes, :integer, default: 0
     field :opt2_votes, :integer, default: 0
+    field :users_who_voted, {:array, :string}, default: []
   end
 
   def changeset(polls, params \\ %{}) do
